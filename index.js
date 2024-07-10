@@ -15,14 +15,28 @@ function appendToDisplay(value) {
     display.value += value;
 }
 
-function calculateResult() {
+
+document.addEventListener('DOMContentLoaded', (event) => {
     const display = document.getElementById('display');
-    try
-    {
-        display.value = eval(display.value);
+    const calculateButton = document.getElementById('calculateButton');
+
+    calculateButton.addEventListener('click', calculateResult);
+
+    function calculateResult() {
+        try {
+            display.value = appendResult(display.value);
+        } catch (error) {
+            display.value = 'error';
+        }
     }
-    catch
-    {
-        display.value = 'error';
+
+    function appendResult(result) {
+        result = result.replace();
+        return new Function('return ' + result)();
     }
-}
+
+    if (calculateButton !== 'clear') {
+        const clearButton = calculator.querySelector('[data-action=clear]')
+        clearButton.textContent = 'CE'
+      }
+});
